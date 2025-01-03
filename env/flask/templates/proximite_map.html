@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stations à proximité</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        #map {
+            height: 600px;
+            width: 100%;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Stations à proximité de "{{ adresse }}"</h1>
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        // Coordonnées de l'utilisateur
+        const userLat = {{ user_lat }};
+        const userLon = {{ user_lon }};
+
+        // Initialiser la carte centrée sur la position de l'utilisateur
+        const map = L.map('map').setView([userLat, userLon], 14);
+
+        // Ajouter un fond de carte
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Marqueur pour la position de l'utilisateur
+        const userMarker = L.marker([userLat, userLon], { color: 'red' })
+            .addTo(map)
+            .bindPopup("Vous êtes ici.")
+            .openPopup();
+
+        // Ajouter les marqueurs pour les stations
+        const stations = {{ stations | tojson | safe }};
+        console.log("Stations reçues :", stations);  // Log pour débogage
+
+        stations.forEach(station => {
+            // Vérifier que les coordonnées sont valides
+            if (station.Latitude && station.Longitude) {
+                const marker = L.marker([station.Latitude, station.Longitude])
+                    .addTo(map)
+                    .bindPopup(`
+                        <b>${station.Nom}</b><br>
+                        <b>Ville :</b> ${station.nom_ville}<br>
+                        <b>Vélos disponibles :</b> ${station["Vélos disponibles"]}<br>
+                        <b>Places disponibles :</b> ${station["Places disponibles"]}
+                    `);
+            } else {
+                console.warn("Coordonnées manquantes pour la station :", station);
+            }
+        });
+    </script>
+</body>
+</html>

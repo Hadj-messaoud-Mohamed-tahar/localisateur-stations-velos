@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stations de vélos - {{ ville }}</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+    <style>
+        #map {
+            width: 100%;
+            height: 600px;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Stations de vélos à {{ ville }}</h1>
+    <div id="map"></div>
+
+    <script>
+        // Initialiser la carte
+        const map = L.map('map').setView([48.8566, 2.3522], 13); // Coordonées par défaut
+
+        // Ajouter une couche de tuiles (OpenStreetMap)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 18,
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Ajouter les stations à la carte
+        const stations = {{ stations|tojson }};
+        stations.forEach(station => {
+            const marker = L.marker([station.Latitude, station.Longitude]).addTo(map);
+            marker.bindPopup(`
+                <b>${station.Nom}</b><br>
+                Vélos disponibles : ${station["Vélos disponibles"]}<br>
+                Places libres : ${station["Places disponibles"]}
+            `);
+        });
+
+        // Centrer la carte sur la première station
+        if (stations.length > 0) {
+            map.setView([stations[0].Latitude, stations[0].Longitude], 13);
+        }
+    </script>
+</body>
+</html>

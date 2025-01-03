@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choisir une ville</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        form {
+            display: inline-block;
+            margin-top: 20px;
+        }
+        select {
+            font-size: 16px;
+            padding: 5px;
+        }
+        button {
+            color: blue;
+            font-size: 16px;
+            padding: 5px 10px;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Bienvenue</h1>
+    <p>Sélectionnez une ville pour voir les informations des stations de vélos.</p>
+    <form method="POST">
+        <select name="ville" >
+            <option value="Lille">Lille</option>
+            <option value="Strasbourg">Strasbourg</option>
+            <option value="Toulouse">Toulouse</option>
+        </select>
+        <button type="submit">Confirmer</button>
+    </form>
+
+<h2>Rechercher des stations à proximité</h2>
+<form method="POST" action="{{ url_for('proximite') }}">
+    <label for="adresse">Adresse :</label>
+    <input type="text" id="adresse" name="adresse" placeholder="Exemple : 10 rue de Paris, Lille" required>
+    <button type="submit">Rechercher</button>
+</form>
+
+
+</body>
+</html>
+
