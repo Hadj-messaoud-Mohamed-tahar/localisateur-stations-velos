@@ -16,7 +16,7 @@ Ce projet est une application web interactive permettant de localiser et d’obt
 ## Technologies utilisées
 
 - **Backend** : Python (Flask, SQLite, Requests, Schedule, Haversine)
-- **Frontend** : HTML, CSS, JavaScript (Leaflet pour les cartes)
+- **Frontend** : HTML, JavaScript (Leaflet pour les cartes)
 - **API utilisées** :
   - OpenCageData : Conversion des adresses en coordonnées GPS.
   - API des services de vélos des trois villes.
