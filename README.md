@@ -28,5 +28,5 @@ Ce projet est une application web interactive permettant de localiser et d’obt
 ## Installation
 1. Clonez le dépôt :
    ```bash
-   git clone https://github.com/yourusername/bike-station-locator.git
+   git clone https://github.com/Hadj-messaoud-Mohamed-tahar/localisateur-stations-velos.git
    cd bike-station-locator
