@@ -2,6 +2,10 @@
 
 ## Description
 Ce projet est une application web interactive permettant de localiser et d’obtenir des informations en temps réel sur les stations de vélos partagés à Lille, Toulouse, et Strasbourg.
+![home](https://github.com/user-attachments/assets/6740e433-7213-4dca-ba96-c32d71bdb14a)
+![exemple_localisation](https://github.com/user-attachments/assets/a4ce8ee3-62d4-4954-8ad0-6cc3a018c78c)
+![exemple_ville](https://github.com/user-attachments/assets/9e4730b7-139e-490c-8e3a-5f45e4248eba)
+
 
 ## Fonctionnalités principales
 - Affichage des stations de vélos sur une carte interactive.
